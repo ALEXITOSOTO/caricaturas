@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="js/gestionCaricaturas.js" type="module"></script>
+    <title>Gestion Caricaturas</title>
+</head>
+<body style="background-color: #212529; margin: 2vh;">
+    <h1 style="background-color: #032830; text-align: center; color: aquamarine;">Gestion de Caricaturas</h1>
+    
+    <!-- Botón de Cerrar Sesión -->
+    <div class="text-end">
+        <button id="logout-button" class="btn btn-outline-danger">Cerrar Sesión</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 style="color: #37d1f6;">Ingreso de Caricaturas</h1>
+            <form id="form-product-insert">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="nombreCaricatura" type="text" placeholder="Ingrese Nombre de caricatura" class="form-control" required><br>
+                        <input id="year" type="number" placeholder="Ingrese Año de lanzamiento" class="form-control" required><br>
+                        <input id="creador" type="text" placeholder="Ingrese Creador(es)" class="form-control" required><br>
+                        <input id="genero" type="text" placeholder="Ingrese Género" class="form-control" required><br>
+                        <input id="pais" type="text" placeholder="Ingrese País de origen" class="form-control" required><br>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="personajes" type="text" placeholder="Ingrese Personajes principales" class="form-control" required><br>
+                        <input id="duracion" type="number" placeholder="Ingrese Duración de los episodios" class="form-control" required><br>
+                        <input id="temporadas" type="number" placeholder="Ingrese Número de temporadas" class="form-control" required><br>
+                        <input id="vigencia" type="text" placeholder="Ingrese Vigencia activa o innactiva" class="form-control" required><br>
+                        <input id="popularidad" type="text" placeholder="Ingrese Popularidad" class="form-control" required><br>
+                    </div>        
+                </div>
+                <button type="submit" class="btn btn-outline-success btn-lg">Agregar Caricatura</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <img style="width: 100%; border-radius: 5vh;" src="https://w0.peakpx.com/wallpaper/854/420/HD-wallpaper-cartoon-collage-bugs-bunny-collage-cartoon.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="color: #37d1f6;">Datos de Caricaturas</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Año</th>
+                        <th>Creador(es)</th>
+                        <th>Género</th>
+                        <th>País</th>
+                        <th>Personajes</th>
+                        <th>Duración</th>
+                        <th>Temporadas</th>
+                        <th>Vigencia</th>
+                        <th>Popularidad</th>
+                        <th>Opción</th>
+                    </tr>
+                </thead>
+                <tbody id="caricaturasTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal para editar caricaturas -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Caricatura</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-product-edit">
+                        <div class="mb-3">
+                            <label for="nombreCaricaturaEdit" class="form-label">Nombre de Caricatura</label>
+                            <input type="text" class="form-control" id="nombreCaricaturaEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="yearEdit" class="form-label">Año de lanzamiento</label>
+                            <input type="number" class="form-control" id="yearEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="creadorEdit" class="form-label">Creador(es)</label>
+                            <input type="text" class="form-control" id="creadorEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="generoEdit" class="form-label">Género</label>
+                            <input type="text" class="form-control" id="generoEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="paisEdit" class="form-label">País de origen</label>
+                            <input type="text" class="form-control" id="paisEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="personajesEdit" class="form-label">Personajes principales</label>
+                            <input type="text" class="form-control" id="personajesEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="duracionEdit" class="form-label">Duración de los episodios</label>
+                            <input type="number" class="form-control" id="duracionEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="temporadasEdit" class="form-label">Número de temporadas</label>
+                            <input type="number" class="form-control" id="temporadasEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vigenciaEdit" class="form-label">Vigencia</label>
+                            <input type="text" class="form-control" id="vigenciaEdit" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="popularidadEdit" class="form-label">Popularidad</label>
+                            <input type="text" class="form-control" id="popularidadEdit" required>
+                        </div>
+                        <input type="hidden" id="editDocId">
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
